@@ -1,5 +1,5 @@
 print 'initializing...'
-from SimpleCV import Camera
+from SimpleCV import Camera, Color
 
 if __name__ == '__main__':
 	print 'init camera...'
