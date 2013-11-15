@@ -29,6 +29,7 @@ class Pibot(object):
         # TODO: animation
         self.grid.grid_array(moods[mood]['smiley'])
         self.lcd.message("  Pi-bot\n%s" % mood)
+        print 'My mood is %s' % mood
 
     def head(self, x, y):
         """move head from -1 to 1, (0,0) is center.
@@ -38,6 +39,7 @@ class Pibot(object):
         """
         self.pwm.setPWM(4, 0, int((float(x)+1)/2 * (SERVO_MAX-SERVO_MIN) + SERVO_MIN))
         self.pwm.setPWM(5, 0, int((float(y)+1)/2 * (SERVO_MAX-SERVO_MIN) + SERVO_MIN))
+
 
 if __name__ == '__main__':
     # Initialise the PWM device using the default address

@@ -14,15 +14,12 @@ Features::
 - servos are controlled with the 16 channel pwm/servo driver from adafruit
 
 
-Camera module
-=============
+Raspbian
+========
 
-Follow the guide on http://www.raspberrypi.org/camera
+Install raspbian wheezy. Do not forget to 'unlock' the free space::
 
-Make it stream video over the network
-
-sudo apt-get install mplayer netcat
-
+    $ sudo raspi-config
 
 16x2 display
 ============
@@ -51,16 +48,28 @@ http://learn.adafruit.com/adafruit-16-channel-servo-driver-with-raspberry-pi/con
 
 
 
-SimpleCV / OpenCV
-=================
+Camera / SimpleCV / OpenCV
+==========================
 
-Make camera work in SimpleCV::
+Follow the guide on http://www.raspberrypi.org/camera
+
+    $ sudo modprobe cuse
+    $ pi@raspberrypi ~ $ uv4l --driver raspicam --auto-video_nr --width 640 --height 480 --encoding jpeg
+
+Make camera work in SimpleCV [works]::
 
 http://www.linux-projects.org/modules/sections/index.php?op=viewarticle&artid=14
 
 Install SimpleCV::
 
+https://github.com/sightmachine/simplecv
+
 https://github.com/sightmachine/SimpleCV/blob/develop/doc/HOWTO-Install%20on%20RaspberryPi.rst
+
+Additionally::
+
+    $ sudo pip install svgwrite
+
 
 More info::
 
