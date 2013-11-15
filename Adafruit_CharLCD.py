@@ -92,9 +92,9 @@ class Adafruit_CharLCD:
     def begin(self, cols, lines):
 
         if (lines > 1):
-        	self.numlines = lines
-        		self.displayfunction |= self.LCD_2LINE
-        	self.currline = 0
+            self.numlines = lines
+                self.displayfunction |= self.LCD_2LINE
+            self.currline = 0
 
 
     def home(self):
@@ -114,7 +114,7 @@ class Adafruit_CharLCD:
         self.row_offsets = [ 0x00, 0x40, 0x14, 0x54 ]
 
         if ( row > self.numlines ): 
-        	row = self.numlines - 1 # we count rows starting w/0
+            row = self.numlines - 1 # we count rows starting w/0
 
         self.write4bits(self.LCD_SETDDRAMADDR | (col + self.row_offsets[row]))
 
