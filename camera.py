@@ -4,7 +4,7 @@ from SimpleCV import Camera
 if __name__ == '__main__':
 	print 'init camera...'
 	#cam = Camera({"width": 640, "height": 480})
-	cam = Camera({"width": 640, "height": 480})
+	cam = Camera()
 	img = cam.getImage()
 
 	print 'detecting faces...'
