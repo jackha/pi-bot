@@ -23,7 +23,7 @@ if __name__ == '__main__':
     darkpixels = 0
     i = 0
 
-    while i < length(hist):
+    while i < len(hist):
         if (i < 10):
             darkpixels = darkpixels + hist[i]
         else:
