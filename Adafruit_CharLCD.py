@@ -271,9 +271,8 @@ if __name__ == '__main__':
     lcd.write4bits(0x80)
     lcd.write4bits(0x00, True)
 
-    lcd.write4bits(0x40)  # First address.
-    for c in [0x0E, 0x1b, 0x11, 0x11, 0x17, 0x17, 0x11, 0x1f]:
+    # Change font, see if screen changes with it.
+    lcd.write4bits(0x40)
+    for c in [0x0E, 0x1b, 0x11, 0x11, 0x17, 0x11, 0x11, 0x1f]:
         lcd.write4bits(c, True)
 
-    lcd.write4bits(0x81)
-    lcd.write4bits(0x00, True)
