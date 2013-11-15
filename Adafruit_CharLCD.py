@@ -8,7 +8,7 @@
 
 from time import sleep
 
-class Adafruit_CharLCD:
+class Hd44780:
 
     # commands
     LCD_CLEARDISPLAY 		= 0x01
@@ -254,7 +254,7 @@ class Adafruit_CharLCD:
 
 if __name__ == '__main__':
 
-    lcd = Adafruit_CharLCD()
+    lcd = Hd44780()
 
     lcd.clear()
     #lcd.rightToLeft()
