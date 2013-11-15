@@ -7,35 +7,35 @@ from hd44780 import Hd44780
 import smiley
 
 moods = {
-	'happy': {'smiley': smiley.smiley},
-	'sad': {'smiley': smiley.smiley_cry},
-	'pacman': {'smiley': smiley.pacman},
-	'ghost': {'smiley': smiley.ghost},
+    'happy': {'smiley': smiley.smiley},
+    'sad': {'smiley': smiley.smiley_cry},
+    'pacman': {'smiley': smiley.pacman},
+    'ghost': {'smiley': smiley.ghost},
 }
 
 class Pibot(object):
-	def __init__(self, grid, lcd, pwm):
-		self.grid = grid
-		self.lcd = lcd
-		self.pwm = pwm
-		self.mood = None
+    def __init__(self, grid, lcd, pwm):
+        self.grid = grid
+        self.lcd = lcd
+        self.pwm = pwm
+        self.mood = None
 
-	def mood(self, mood):
-		self.mood = mood
-		# TODO: animation
-		self.grid.grid_array(moods[mood]['smiley'])
-	    self.lcd.message("  Pi-bot\n%s" % mood)
+    def mood(self, mood):
+        self.mood = mood
+        # TODO: animation
+        self.grid.grid_array(moods[mood]['smiley'])
+        self.lcd.message("  Pi-bot\n%s" % mood)
 
 
 if __name__ == '__main__':
-	# Initialise the PWM device using the default address
-	# bmp = PWM(0x40, debug=True)
-	pwm = PWM(0x40, debug=True)
-	grid = EightByEightPlus(address=0x71)
-	lcd = Hd44780()
+    # Initialise the PWM device using the default address
+    # bmp = PWM(0x40, debug=True)
+    pwm = PWM(0x40, debug=True)
+    grid = EightByEightPlus(address=0x71)
+    lcd = Hd44780()
 
-	me = Pibot(grid, lcd, pwm)
-	me.mood('happy')
+    me = Pibot(grid, lcd, pwm)
+    me.mood('happy')
     # Test custom font
 
     # Write font to CGRAM, there are 8 possible characters to customize. 
@@ -47,5 +47,5 @@ if __name__ == '__main__':
     lcd.write4bits(0x80)
     lcd.write4bits(0x00, True)
 
-	while 1:
-		sleep(0.1)
+    while 1:
+        sleep(0.1)
