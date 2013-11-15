@@ -93,7 +93,7 @@ class Adafruit_CharLCD:
 
         if (lines > 1):
             self.numlines = lines
-                self.displayfunction |= self.LCD_2LINE
+            self.displayfunction |= self.LCD_2LINE
             self.currline = 0
 
 
