@@ -60,4 +60,5 @@ if __name__ == '__main__':
     lcd.write4bits(0x00, True)
 
     while 1:
+        import pdb; pdb.set_trace()
         sleep(0.1)
