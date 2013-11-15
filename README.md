@@ -51,10 +51,20 @@ http://learn.adafruit.com/adafruit-16-channel-servo-driver-with-raspberry-pi/con
 
 
 
-SimpleCV
-========
+SimpleCV / OpenCV
+=================
+
+Make camera work in SimpleCV::
+
+http://www.linux-projects.org/modules/sections/index.php?op=viewarticle&artid=14
+
+Install SimpleCV::
 
 https://github.com/sightmachine/SimpleCV/blob/develop/doc/HOWTO-Install%20on%20RaspberryPi.rst
+
+More info::
+
+http://tothinkornottothink.com/post/59305587476/raspberry-pi-simplecv-opencv-raspicam-csi-camera
 
 
 Things to check

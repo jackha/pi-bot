@@ -13,6 +13,9 @@ moods = {
     'ghost': {'smiley': smiley.ghost},
 }
 
+SERVO_MIN = 300
+SERVO_MAX = 500
+
 class Pibot(object):
     def __init__(self, grid, lcd, pwm):
         self.grid = grid
@@ -26,6 +29,14 @@ class Pibot(object):
         self.grid.grid_array(moods[mood]['smiley'])
         self.lcd.message("  Pi-bot\n%s" % mood)
 
+    def head(self, x, y):
+        """move head from -1 to 1, (0,0) is center.
+
+        4 is x axis, 
+        5 is y axis
+        """
+        self.pwm.setPWM(4, 0, (x+1)/2 * (SERVO_MAX-SERVO_MIN) + SERVO_MIN)
+        self.pwm.setPWM(5, 0, (y+1)/2 * (SERVO_MAX-SERVO_MIN) + SERVO_MIN)
 
 if __name__ == '__main__':
     # Initialise the PWM device using the default address
@@ -36,6 +47,7 @@ if __name__ == '__main__':
 
     me = Pibot(grid, lcd, pwm)
     me.mood('happy')
+    me.head(0,0)
     # Test custom font
 
     # Write font to CGRAM, there are 8 possible characters to customize. 
