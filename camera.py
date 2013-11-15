@@ -8,7 +8,7 @@ if __name__ == '__main__':
 	img = cam.getImage()
 
 	print 'detecting faces...'
-	faces = img.findHaarFeatures("haar/haarcascade_frontalface_alt.xml")
+	faces = img.findHaarFeatures("haar/haarcascade_frontalface_default.xml")
 
 	#print locations
 	for f in faces:
