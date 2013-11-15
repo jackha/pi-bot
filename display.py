@@ -41,6 +41,7 @@ def arr_to_bytes(arr):
 class EightByEightPlus(EightByEight):
     """Better Eight By Eight by being smarter"""
     def __init__(self, brightness=15, *args, **kwargs):
+        print kwargs
         result = super(EightByEightPlus, self).__init__(*args, **kwargs)
         self.disp.setBrightness(brightness)
         return result
@@ -161,6 +162,6 @@ class SevenSegmentPlus(SevenSegment):
 
 
 if __name__ == '__main__':
-    grid = EightByEightPlus(address=0x71)
+    grid = EightByEightPlus(address=0x71, debug=True)
     import smiley
     grid.grid_array(smiley.smiley)
