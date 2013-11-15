@@ -5,12 +5,13 @@ from time import sleep
 from display import EightByEightPlus
 from hd44780 import Hd44780
 import smiley
+import random
 
 moods = {
     'happy': {'smiley': smiley.smiley},
     'sad': {'smiley': smiley.smiley_cry},
-    'pacman': {'smiley': smiley.pacman},
-    'ghost': {'smiley': smiley.ghost},
+#    'pacman': {'smiley': smiley.pacman},
+#    'ghost': {'smiley': smiley.ghost},
 }
 
 SERVO_MIN = 300
@@ -59,6 +60,10 @@ if __name__ == '__main__':
     lcd.write4bits(0x80)
     lcd.write4bits(0x00, True)
 
+    x, y = 0, 0
+
+
     while 1:
-        import pdb; pdb.set_trace()
-        sleep(0.1)
+        sleep(2)
+        me.mood(random.choice(moods.keys()))
+        me.head(random.random()-0.5, random.random()-0.5)
