@@ -29,6 +29,14 @@ sudo apt-get install mplayer netcat
 
 http://learn.adafruit.com/downloads/pdf/drive-a-16x2-lcd-directly-with-a-raspberry-pi.pdf
 
+
+sudo apt-get install python-dev
+sudo apt-get install python-setuptools
+sudo easy_install -U distribute
+sudo apt-get install python-pip
+sudo pip install rpi.gpio
+
+
 http://www.rpiblog.com/2012/11/interfacing-16x2-lcd-with-raspberry-pi.html
 
 
