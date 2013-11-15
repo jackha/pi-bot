@@ -257,7 +257,7 @@ if __name__ == '__main__':
     lcd = Adafruit_CharLCD()
 
     lcd.clear()
-    lcd.rightToLeft()
+    #lcd.rightToLeft()
     lcd.message("  Adafruit 16x2\n  Standard LCD")
 
     from time import sleep
