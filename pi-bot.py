@@ -18,10 +18,10 @@ class Pibot(object):
         self.grid = grid
         self.lcd = lcd
         self.pwm = pwm
-        self.mood = None
+        self._mood = None
 
     def mood(self, mood):
-        self.mood = mood
+        self._mood = mood
         # TODO: animation
         self.grid.grid_array(moods[mood]['smiley'])
         self.lcd.message("  Pi-bot\n%s" % mood)
