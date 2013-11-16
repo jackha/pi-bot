@@ -54,24 +54,33 @@ Camera / SimpleCV / OpenCV
 
 Follow the guide on http://www.raspberrypi.org/camera
 
-    $ sudo modprobe cuse
-    $ pi@raspberrypi ~ $ uv4l --driver raspicam --auto-video_nr --width 640 --height 480 --encoding jpeg
-
-Copy boot.sh to /boot (NOT symlink!)
-
-Add in /etc/rc.local::
-
-/boot/boot.sh
 
 Make camera work in SimpleCV::
 
 http://www.linux-projects.org/modules/sections/index.php?op=viewarticle&artid=14
 
-Install SimpleCV::
+OpenCV and SimpleCV::
+    $ wget https://raw.github.com/jayrambhia/Install-OpenCV/master/Ubuntu/2.4/opencv2_4_6_1.sh
+    $ chmod +x opencv2_4_6_1.sh
+    $ ./opencv2_4_6_1.sh
 
-https://github.com/sightmachine/simplecv
+    $ sudo apt-get install git
+    $ git clone git://github.com/sightmachine/SimpleCV.git
+    $ cd SimpleCV
+    $ python setup.py install
 
-https://github.com/sightmachine/SimpleCV/blob/develop/doc/HOWTO-Install%20on%20RaspberryPi.rst
+
+    $ sudo modprobe cuse
+    $ pi@raspberrypi ~ $ uv4l --driver raspicam --auto-video_nr --width 640 --height 480 --encoding jpeg
+
+Copy boot.sh to /boot (NOT symlink!)::
+
+    $ sudo cp boot.sh /boot
+
+Add in /etc/rc.local::
+
+/boot/boot.sh
+
 
 Additionally::
 
@@ -79,6 +88,11 @@ Additionally::
 
 
 More info::
+
+
+https://github.com/sightmachine/simplecv
+
+https://github.com/sightmachine/SimpleCV/blob/develop/doc/HOWTO-Install%20on%20RaspberryPi.rst
 
 http://tothinkornottothink.com/post/59305587476/raspberry-pi-simplecv-opencv-raspicam-csi-camera
 

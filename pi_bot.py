@@ -10,6 +10,9 @@ import random
 moods = {
     'happy': {'smiley': smiley.smiley},
     'sad': {'smiley': smiley.smiley_cry},
+    'neutral': {'smiley': smiley.smiley_neutral},
+    'sleepy': {'smiley': smiley.smiley_sleep},
+    'uhuh': {'smiley': smiley.smiley_uhoh},
 #    'pacman': {'smiley': smiley.pacman},
 #    'ghost': {'smiley': smiley.ghost},
 }
@@ -45,6 +48,8 @@ if __name__ == '__main__':
     # Initialise the PWM device using the default address
     # bmp = PWM(0x40, debug=True)
     pwm = PWM(0x40, debug=True)
+    pwm.setPWMFreq(60)                        # Set frequency to 60 Hz
+
     grid = EightByEightPlus(address=0x71)
     lcd = Hd44780()
 
