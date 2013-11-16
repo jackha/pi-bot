@@ -31,10 +31,9 @@ class Pibot(object):
     def mood(self, mood=None):
         if mood is not None:
             self._mood = mood
-        # TODO: animation
-        self.grid.grid_array(moods[mood]['smiley'])
-        self.lcd.message("  Pi-bot\n%s" % mood)
-        print 'My mood is %s' % mood
+            self.grid.grid_array(moods[self._mood]['smiley'])
+            self.lcd.message("  Pi-bot\n%s" % self._mood)
+            print 'My mood is %s' % self._mood
         return self._mood
 
     def head(self, x, y):
