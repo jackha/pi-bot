@@ -69,8 +69,19 @@ if __name__ == '__main__':
 
     x, y = 0, 0
 
+    now = datetime.datetime.now()
+    movement_timeout = now
+    mood_timeout = now
 
     while 1:
-        sleep(2)
-        me.mood(random.choice(moods.keys()))
-        me.head(random.random()-0.5, random.random()-0.5)
+        now = datetime.datetime.now()
+
+        if now > movement_timeout:
+            me.head(random.random()-0.5, random.random()-0.5)
+            movement_timeout = now + datetime.timedelta(seconds=2)
+
+        if now > mood_timeout:
+            me.mood(random.choice(moods.keys()))
+            mood_timeout = now + datetime.timedelta(seconds=3.7)
+
+        sleep(0.1)
