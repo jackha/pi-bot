@@ -6,6 +6,7 @@ from display import EightByEightPlus
 from hd44780 import Hd44780
 import smiley
 import random
+import datetime
 
 moods = {
     'happy': {'smiley': smiley.smiley},
