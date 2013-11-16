@@ -35,6 +35,7 @@ http://learn.adafruit.com/downloads/pdf/drive-a-16x2-lcd-directly-with-a-raspber
 
 to see if it works::
 
+
     $ sudo python Adafruit_CharLCD.py
 
 
@@ -56,7 +57,13 @@ Follow the guide on http://www.raspberrypi.org/camera
     $ sudo modprobe cuse
     $ pi@raspberrypi ~ $ uv4l --driver raspicam --auto-video_nr --width 640 --height 480 --encoding jpeg
 
-Make camera work in SimpleCV [works]::
+Copy boot.sh to /boot (NOT symlink!)
+
+Add in /etc/rc.local::
+
+/boot/boot.sh
+
+Make camera work in SimpleCV::
 
 http://www.linux-projects.org/modules/sections/index.php?op=viewarticle&artid=14
 
