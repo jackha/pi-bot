@@ -9,11 +9,11 @@ import random
 import datetime
 
 moods = {
-    'happy': {'smiley': smiley.smiley, 'movement': 1},
-    'sad': {'smiley': smiley.smiley_cry, 'movement': 3},
-    'neutral': {'smiley': smiley.smiley_neutral, 'movement': 2},
-    'sleep': {'smiley': smiley.smiley_sleep, 'movement': 0},
-    'uhuh': {'smiley': smiley.smiley_uhoh, 'movement': 1},
+    'happy': {'smiley': smiley.smiley_happy, 'movement': 1},
+    # 'sad': {'smiley': smiley.smiley_cry, 'movement': 3},
+    # 'neutral': {'smiley': smiley.smiley_neutral, 'movement': 2},
+    # 'sleep': {'smiley': smiley.smiley_sleep, 'movement': 0},
+    # 'uhuh': {'smiley': smiley.smiley_uhoh, 'movement': 1},
 #    'pacman': {'smiley': smiley.pacman},
 #    'ghost': {'smiley': smiley.ghost},
 }
@@ -21,19 +21,43 @@ moods = {
 SERVO_MIN = 300
 SERVO_MAX = 500
 
+
+class Animation(object):
+    def __init__(self, smiley):
+        """ Smiley is an array of frames, see smiley_happy"""
+        self.smiley = smiley
+        self.nof_frames = len(self.smiley)
+        self.index = 0
+        self.timeout = datetime.datetime.now()
+
+    def grid_if_update_needed(self):
+        now = datetime.datetime.now()
+        if now > self.timeout:
+            self.index = (self.index + 1) % self.nof_frames
+            self.timeout = now + datetime.timedelta(seconds=self.smiley[self.index]['time'])
+            return self.smiley[self.index]['smiley']
+        return None
+
+
 class Pibot(object):
     def __init__(self, grid, lcd, pwm):
         self.grid = grid
         self.lcd = lcd
         self.pwm = pwm
         self._mood = None
+        # prepare animations for moods
+        self.mood_animations = {}
+        for mood, value in moods.items():
+            self.mood_animations[mood] = Animation(value['smiley'])
 
     def mood(self, mood=None):
         if mood is not None:
             self._mood = mood
-            self.grid.grid_array(moods[self._mood]['smiley'])
             self.lcd.message("  Pi-bot\n%s" % self._mood)
             print 'My mood is %s' % self._mood
+        update_grid = self.mood_animations[self._mood].grid_if_update_needed()
+        if update_grid is not None:
+            self.grid.grid_array(update_grid)
         return self._mood
 
     def head(self, x, y):
