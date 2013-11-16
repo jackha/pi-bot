@@ -9,11 +9,11 @@ import random
 import datetime
 
 moods = {
-    'happy': {'smiley': smiley.smiley},
-    'sad': {'smiley': smiley.smiley_cry},
-    'neutral': {'smiley': smiley.smiley_neutral},
-    'sleepy': {'smiley': smiley.smiley_sleep},
-    'uhuh': {'smiley': smiley.smiley_uhoh},
+    'happy': {'smiley': smiley.smiley, 'movement': 1},
+    'sad': {'smiley': smiley.smiley_cry, 'movement': 3},
+    'neutral': {'smiley': smiley.smiley_neutral, 'movement': 2},
+    'sleep': {'smiley': smiley.smiley_sleep, 'movement': 0},
+    'uhuh': {'smiley': smiley.smiley_uhoh, 'movement': 1},
 #    'pacman': {'smiley': smiley.pacman},
 #    'ghost': {'smiley': smiley.ghost},
 }
@@ -28,12 +28,14 @@ class Pibot(object):
         self.pwm = pwm
         self._mood = None
 
-    def mood(self, mood):
-        self._mood = mood
+    def mood(self, mood=None):
+        if mood is not None:
+            self._mood = mood
         # TODO: animation
         self.grid.grid_array(moods[mood]['smiley'])
         self.lcd.message("  Pi-bot\n%s" % mood)
         print 'My mood is %s' % mood
+        return self._mood
 
     def head(self, x, y):
         """move head from -1 to 1, (0,0) is center.
@@ -77,9 +79,9 @@ if __name__ == '__main__':
     while 1:
         now = datetime.datetime.now()
 
-        if now > movement_timeout:
+        if now > movement_timeout and me.mood() != 'sleep':
             me.head(random.random()-0.5, random.random()-0.5)
-            movement_timeout = now + datetime.timedelta(seconds=2)
+            movement_timeout = now + datetime.timedelta(seconds=moods[me.mood()]['movement'])
 
         if now > mood_timeout:
             me.mood(random.choice(moods.keys()))
