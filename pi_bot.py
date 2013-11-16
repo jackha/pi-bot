@@ -101,6 +101,7 @@ if __name__ == '__main__':
 
     while 1:
         now = datetime.datetime.now()
+        me.mood()  # Triggers update animation
 
         if now > movement_timeout and me.mood() != 'sleep':
             me.head(random.random()-0.5, random.random()-0.5)
