@@ -11,11 +11,11 @@ import datetime
 moods = {
     'happy': {'smiley': smiley.smiley_happy_anim, 'movement': 1},
     'sad': {'smiley': smiley.smiley_sad_anim, 'movement': 3},
-    # 'neutral': {'smiley': smiley.smiley_neutral, 'movement': 2},
-    # 'sleep': {'smiley': smiley.smiley_sleep, 'movement': 0},
+    'neutral': {'smiley': smiley.smiley_neutral, 'movement': 2},
+    'sleep': {'smiley': smiley.smiley_sleep_anim, 'movement': 0},
     'uhuh': {'smiley': smiley.smiley_uhoh_anim, 'movement': 1},
-#    'pacman': {'smiley': smiley.pacman},
-#    'ghost': {'smiley': smiley.ghost},
+    'pacman': {'smiley': smiley.pacman_anim, 'movement': 3},
+    'ghost': {'smiley': smiley.ghost_anim, 'movement': 3},
 }
 
 SERVO_MIN = 300
