@@ -13,7 +13,7 @@ if __name__ == '__main__':
 
         #print locations
         for f in faces:
-        	print "I found a face at " + str(f.coordinates())
+            print "I found a face at " + str(f.coordinates())
             f.draw(Color.GREEN)
         img.show()
 
