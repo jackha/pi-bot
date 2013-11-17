@@ -21,6 +21,12 @@ Install raspbian wheezy. Do not forget to 'unlock' the free space::
 
     $ sudo raspi-config
 
+
+Some basic tools::
+
+    $ sudo apt-get install git
+
+
 16x2 display
 ============
 
@@ -64,14 +70,13 @@ OpenCV and SimpleCV::
     $ chmod +x opencv2_4_6_1.sh
     $ ./opencv2_4_6_1.sh
 
-    $ sudo apt-get install git
     $ git clone git://github.com/sightmachine/SimpleCV.git
     $ cd SimpleCV
-    $ python setup.py install
+    $ sudo python setup.py install
 
 
     $ sudo modprobe cuse
-    $ pi@raspberrypi ~ $ uv4l --driver raspicam --auto-video_nr --width 640 --height 480 --encoding jpeg
+    $ uv4l --driver raspicam --auto-video_nr --width 640 --height 480 --encoding jpeg
 
 Copy boot.sh to /boot (NOT symlink!)::
 
