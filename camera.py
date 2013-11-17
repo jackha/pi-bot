@@ -8,6 +8,8 @@ if __name__ == '__main__':
 
     while 1:
         img = cam.getImage()
+
+        import pdb; pdb.set_trace()
         img = img.resize((320, 240), Image.NEAREST)
 
         print 'detecting faces...'
