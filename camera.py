@@ -1,6 +1,5 @@
 print 'initializing...'
 from SimpleCV import Camera, Color
-import Image
 
 if __name__ == '__main__':
     print 'init camera...'
@@ -9,8 +8,8 @@ if __name__ == '__main__':
     while 1:
         img = cam.getImage()
 
-        import pdb; pdb.set_trace()
-        img = img.resize((320, 240), Image.NEAREST)
+        #import pdb; pdb.set_trace()
+        img = img.resize(320, 240)
 
         print 'detecting faces...'
         faces = img.findHaarFeatures("haar/haarcascade_frontalface_default.xml")
