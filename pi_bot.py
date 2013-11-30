@@ -70,6 +70,9 @@ class Pibot(object):
         self.pwm.setPWM(4, 0, int((float(x)+1)/2 * (SERVO_MAX-SERVO_MIN) + SERVO_MIN))
         self.pwm.setPWM(5, 0, int((float(y)+1)/2 * (SERVO_MAX-SERVO_MIN) + SERVO_MIN))
 
+    def left_arm(self, value):
+        self.pwm.setPWM(0, 0, value)
+
 
 if __name__ == '__main__':
     # Initialise the PWM device using the default address
@@ -106,6 +109,7 @@ if __name__ == '__main__':
 
         if now > movement_timeout and me.mood() != 'sleep':
             me.head(random.random()-0.5, random.random()-0.5)
+            me.left_arm(int(random.random()*1000))
             movement_timeout = now + datetime.timedelta(seconds=moods[me.mood()]['movement'])
 
         if now > mood_timeout:
