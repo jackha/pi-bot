@@ -16,6 +16,7 @@ moods = {
     'uhuh': {'smiley': smiley.smiley_uhoh_anim, 'movement': 1},
     'pacman': {'smiley': smiley.pacman_anim, 'movement': 3},
     'ghost': {'smiley': smiley.ghost_anim, 'movement': 3},
+    'spiral': {'smiley': smiley.spiral_anim, 'movement': 3},
 }
 
 SERVO_MIN = 300
