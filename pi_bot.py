@@ -22,6 +22,7 @@ moods = {
 
 SERVO_MIN = 300
 SERVO_MAX = 500
+PWM_SLEEP = 0.5
 
 
 class Animation(object):
@@ -83,9 +84,9 @@ class Pibot(object):
         5 is y axis
         """
         self.pwm.setPWM(4, 0, int((float(x)+1)/2 * (SERVO_MAX-SERVO_MIN) + SERVO_MIN))
-        sleep(0.1)
+        sleep(PWM_SLEEP)
         self.pwm.setPWM(5, 0, int((float(y)+1)/2 * (SERVO_MAX-SERVO_MIN) + SERVO_MIN))
-        sleep(0.1)
+        sleep(PWM_SLEEP)
 
     def right_arm(self, value):
         self.pwm_360(10, value)
@@ -102,12 +103,12 @@ class Pibot(object):
     def pwm_360(self, port, value):
         """Choose a value between -1 and 1"""
         self.pwm.setPWM(port, 0, int(float(value+1) * 0.5 * (453-353) + 353))
-        sleep(0.1)
+        sleep(PWM_SLEEP)
 
     def reset_pwm(self):
         for i in range(0, 16):
             self.pwm.setPWM(i, 0, -1)
-            sleep(0.1)
+            sleep(PWM_SLEEP)
 
 
 if __name__ == '__main__':
@@ -158,6 +159,6 @@ if __name__ == '__main__':
             me.mood(random.choice(moods.keys()))
             me.head(random.random()-0.5, random.random()-0.5)
             mood_timeout = now + datetime.timedelta(seconds=3.7)
-            me.mood_arms_and_legs()  # will block for a moment
+            #me.mood_arms_and_legs()  # will block for a moment
 
         sleep(0.1)
