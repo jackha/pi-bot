@@ -99,7 +99,7 @@ class Pibot(object):
 
     def pwm_360(self, port, value):
         """Choose a value between -1 and 1"""
-        self.pwm.setPWM(port, 0, float(value+1) * 0.5 * (453-353) + 353)
+        self.pwm.setPWM(port, 0, int(float(value+1) * 0.5 * (453-353) + 353))
 
     def reset_pwm(self):
         for i in range(0, 6):
