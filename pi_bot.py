@@ -73,6 +73,10 @@ class Pibot(object):
     def left_arm(self, value):
         self.pwm.setPWM(0, 0, value)
 
+    def reset_pwm(self):
+        for i in range(0, 6):
+            self.pwm.setPWM(i, 0, 0)
+
 
 if __name__ == '__main__':
     # Initialise the PWM device using the default address
