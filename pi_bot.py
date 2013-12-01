@@ -102,8 +102,8 @@ class Pibot(object):
         self.pwm.setPWM(port, 0, int(float(value+1) * 0.5 * (453-353) + 353))
 
     def reset_pwm(self):
-        for i in range(0, 6):
-            self.pwm.setPWM(i, 0, 0)
+        for i in range(0, 16):
+            self.pwm.setPWM(i, 0, -1)
 
 
 if __name__ == '__main__':
@@ -136,6 +136,7 @@ if __name__ == '__main__':
     mood_timeout = now
 
     #import pdb; pdb.set_trace()
+    me.reset_pwm()
 
     while 1:
         now = datetime.datetime.now()
