@@ -10,13 +10,13 @@ import datetime
 
 moods = {
     'happy': {'smiley': smiley.smiley_happy_anim, 'movement': 1},
-    #'sad': {'smiley': smiley.smiley_sad_anim, 'movement': 3},
-    #'neutral': {'smiley': smiley.smiley_neutral_anim, 'movement': 2},
-    #'sleep': {'smiley': smiley.smiley_sleep_anim, 'movement': 0},
-    #'uhuh': {'smiley': smiley.smiley_uhoh_anim, 'movement': 1},
-    #'pacman': {'smiley': smiley.pacman_anim, 'movement': 3},
-    #'ghost': {'smiley': smiley.ghost_anim, 'movement': 3},
-    #'spiral': {'smiley': smiley.spiral_anim, 'movement': 3},
+    'sad': {'smiley': smiley.smiley_sad_anim, 'movement': 3},
+    'neutral': {'smiley': smiley.smiley_neutral_anim, 'movement': 2},
+    'sleep': {'smiley': smiley.smiley_sleep_anim, 'movement': 0},
+    'uhuh': {'smiley': smiley.smiley_uhoh_anim, 'movement': 1},
+    'pacman': {'smiley': smiley.pacman_anim, 'movement': 3},
+    'ghost': {'smiley': smiley.ghost_anim, 'movement': 3},
+    'spiral': {'smiley': smiley.spiral_anim, 'movement': 3},
     'grow_spiral': {'smiley': smiley.grow_spiral_anim, 'movement': 3},
 }
 
@@ -55,12 +55,26 @@ class Pibot(object):
     def mood(self, mood=None):
         if mood is not None:
             self._mood = mood
-            self.lcd.message("  Pi-bot\n%s" % self._mood)
+            self.lcd.message("  R.O.B.\n%s" % self._mood)
             print 'My mood is %s' % self._mood
         update_grid = self.mood_animations[self._mood].grid_if_update_needed()
         if update_grid is not None:
             self.grid.grid_array(update_grid)
         return self._mood
+
+    def mood_arms_and_legs(self):
+        self.left_arm(1)
+        self.right_arm(-1)
+        sleep(1)
+        self.left_arm(-1)
+        self.right_arm(1)
+        sleep(1)
+        self.left_arm(1)
+        self.right_arm(-1)
+        sleep(1)
+        self.left_arm(-1)
+        self.right_arm(1)
+        sleep(1)
 
     def head(self, x, y):
         """move head from -1 to 1, (0,0) is center.
@@ -71,8 +85,21 @@ class Pibot(object):
         self.pwm.setPWM(4, 0, int((float(x)+1)/2 * (SERVO_MAX-SERVO_MIN) + SERVO_MIN))
         self.pwm.setPWM(5, 0, int((float(y)+1)/2 * (SERVO_MAX-SERVO_MIN) + SERVO_MIN))
 
+    def right_arm(self, value):
+        self.pwm_360(10, value)
+
     def left_arm(self, value):
-        self.pwm.setPWM(0, 0, value)
+        self.pwm_360(12, value)
+
+    def right_foot(self, value):
+        self.pwm_360(14, value)
+
+    def left_foow(self, value):
+        self.pwm_360(16, value)
+
+    def pwm_360(self, port, value):
+        """Choose a value between -1 and 1"""
+        self.pwm.setPWM(port, 0, float(value+1) * 0.5 * (453-353) + 353)
 
     def reset_pwm(self):
         for i in range(0, 6):
@@ -115,12 +142,15 @@ if __name__ == '__main__':
         me.mood()  # Triggers update animation
 
         if now > movement_timeout and me.mood() != 'sleep':
-            me.head(random.random()-0.5, random.random()-0.5)
-            me.left_arm(int(random.random()*1000))
-            movement_timeout = now + datetime.timedelta(seconds=moods[me.mood()]['movement'])
+            #me.head(random.random()-0.5, random.random()-0.5)
+            #me.left_arm(int(random.random()*1000))
+            #movement_timeout = now + datetime.timedelta(seconds=moods[me.mood()]['movement'])
+            pass
 
         if now > mood_timeout:
+            # Choose a new mood
             me.mood(random.choice(moods.keys()))
             mood_timeout = now + datetime.timedelta(seconds=3.7)
+            me.mood_arms_and_legs()  # will block for a moment
 
         sleep(0.1)
