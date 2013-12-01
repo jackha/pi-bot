@@ -82,8 +82,10 @@ class Pibot(object):
         4 is x axis, 
         5 is y axis
         """
-        self.pwm.setPWM(4, 0, int((float(x)+1)/2 * (SERVO_MAX-SERVO_MIN) + SERVO_MIN))
+        self.pwm.setPWM(4, 0, int((float(x)+1)/2 * (SERVO_MAX-SERVO_MIN) + SERVO_MIN)
+        sleep(0.1)
         self.pwm.setPWM(5, 0, int((float(y)+1)/2 * (SERVO_MAX-SERVO_MIN) + SERVO_MIN))
+        sleep(0.1)
 
     def right_arm(self, value):
         self.pwm_360(10, value)
@@ -100,10 +102,12 @@ class Pibot(object):
     def pwm_360(self, port, value):
         """Choose a value between -1 and 1"""
         self.pwm.setPWM(port, 0, int(float(value+1) * 0.5 * (453-353) + 353))
+        sleep(0.1)
 
     def reset_pwm(self):
         for i in range(0, 16):
             self.pwm.setPWM(i, 0, -1)
+            sleep(0.1)
 
 
 if __name__ == '__main__':
