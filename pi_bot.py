@@ -9,7 +9,7 @@ import random
 import datetime
 
 moods = {
-    #'happy': {'smiley': smiley.smiley_happy_anim, 'movement': 1},
+    'happy': {'smiley': smiley.smiley_happy_anim, 'movement': 1},
     #'sad': {'smiley': smiley.smiley_sad_anim, 'movement': 3},
     #'neutral': {'smiley': smiley.smiley_neutral_anim, 'movement': 2},
     #'sleep': {'smiley': smiley.smiley_sleep_anim, 'movement': 0},
