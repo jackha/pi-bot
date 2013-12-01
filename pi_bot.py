@@ -135,8 +135,8 @@ if __name__ == '__main__':
     movement_timeout = now
     mood_timeout = now
 
-    #import pdb; pdb.set_trace()
     me.reset_pwm()
+    import pdb; pdb.set_trace()
 
     while 1:
         now = datetime.datetime.now()
