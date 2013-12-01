@@ -22,7 +22,7 @@ moods = {
 
 SERVO_MIN = 300
 SERVO_MAX = 500
-PWM_SLEEP = 0.5
+PWM_SLEEP = 0.05
 
 
 class Animation(object):
@@ -141,7 +141,7 @@ if __name__ == '__main__':
     mood_timeout = now
 
     me.reset_pwm()
-    import pdb; pdb.set_trace()
+    #import pdb; pdb.set_trace()
 
     while 1:
         now = datetime.datetime.now()
@@ -159,6 +159,6 @@ if __name__ == '__main__':
             me.mood(random.choice(moods.keys()))
             me.head(random.random()-0.5, random.random()-0.5)
             mood_timeout = now + datetime.timedelta(seconds=3.7)
-            me.mood_arms_and_legs()  # will block for a moment
+            #me.mood_arms_and_legs()  # will block for a moment
 
         sleep(0.1)
