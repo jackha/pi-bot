@@ -145,11 +145,13 @@ if __name__ == '__main__':
             #me.head(random.random()-0.5, random.random()-0.5)
             #me.left_arm(int(random.random()*1000))
             #movement_timeout = now + datetime.timedelta(seconds=moods[me.mood()]['movement'])
+            #me.head(random.random()-0.5, random.random()-0.5)
             pass
 
         if now > mood_timeout:
             # Choose a new mood
             me.mood(random.choice(moods.keys()))
+            me.head(random.random()-0.5, random.random()-0.5)
             mood_timeout = now + datetime.timedelta(seconds=3.7)
             me.mood_arms_and_legs()  # will block for a moment
 
