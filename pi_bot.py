@@ -159,6 +159,6 @@ if __name__ == '__main__':
             me.mood(random.choice(moods.keys()))
             me.head(random.random()-0.5, random.random()-0.5)
             mood_timeout = now + datetime.timedelta(seconds=3.7)
-            #me.mood_arms_and_legs()  # will block for a moment
+            me.mood_arms_and_legs()  # will block for a moment
 
         sleep(0.1)
