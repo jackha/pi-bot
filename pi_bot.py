@@ -9,14 +9,14 @@ import random
 import datetime
 
 moods = {
-    'happy': {'smiley': smiley.smiley_happy_anim, 'movement': 1},
-    'sad': {'smiley': smiley.smiley_sad_anim, 'movement': 3},
-    'neutral': {'smiley': smiley.smiley_neutral_anim, 'movement': 2},
-    'sleep': {'smiley': smiley.smiley_sleep_anim, 'movement': 0},
-    'uhuh': {'smiley': smiley.smiley_uhoh_anim, 'movement': 1},
-    'pacman': {'smiley': smiley.pacman_anim, 'movement': 3},
-    'ghost': {'smiley': smiley.ghost_anim, 'movement': 3},
-    'spiral': {'smiley': smiley.spiral_anim, 'movement': 3},
+    #'happy': {'smiley': smiley.smiley_happy_anim, 'movement': 1},
+    #'sad': {'smiley': smiley.smiley_sad_anim, 'movement': 3},
+    #'neutral': {'smiley': smiley.smiley_neutral_anim, 'movement': 2},
+    #'sleep': {'smiley': smiley.smiley_sleep_anim, 'movement': 0},
+    #'uhuh': {'smiley': smiley.smiley_uhoh_anim, 'movement': 1},
+    #'pacman': {'smiley': smiley.pacman_anim, 'movement': 3},
+    #'ghost': {'smiley': smiley.ghost_anim, 'movement': 3},
+    #'spiral': {'smiley': smiley.spiral_anim, 'movement': 3},
     'grow_spiral': {'smiley': smiley.grow_spiral_anim, 'movement': 3},
 }
 
