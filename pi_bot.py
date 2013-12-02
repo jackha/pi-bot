@@ -22,7 +22,7 @@ moods = {
 
 SERVO_MIN = 300
 SERVO_MAX = 500
-PWM_SLEEP = 0.05
+PWM_SLEEP = 0.01
 
 
 class Animation(object):
@@ -102,7 +102,10 @@ class Pibot(object):
 
     def pwm_360(self, port, value):
         """Choose a value between -1 and 1"""
-        self.pwm.setPWM(port, 0, int(float(value+1) * 0.5 * (453-353) + 353))
+        if value == 0:
+            self.pwm.setPWM(port, 0, -1)
+        else:
+            self.pwm.setPWM(port, 0, int(float(value+1) * 0.5 * (453-353) + 353))
         sleep(PWM_SLEEP)
 
     def reset_pwm(self):
