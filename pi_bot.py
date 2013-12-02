@@ -224,7 +224,7 @@ if __name__ == '__main__':
                         me.dizzy()
 
             me.head(random.random()-0.5, random.random()-0.5)
-            mood_timeout = now + datetime.timedelta(seconds=3.7)
+            mood_timeout = now + datetime.timedelta(seconds=30.7)
             #me.mood_arms_and_legs()  # will block for a moment
 
         sleep(0.1)
