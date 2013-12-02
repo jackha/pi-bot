@@ -81,16 +81,24 @@ class Pibot(object):
 
     def nod(self):
         self.head(0,1)
+        sleep(1)
         self.head(0,-1)
+        sleep(1)
         self.head(0,1)
+        sleep(1)
         self.head(0,-1)
+        sleep(1)
         self.head(0,0)
 
     def shake(self):
         self.head(1,0)
+        sleep(1)
         self.head(-1,0)
+        sleep(1)
         self.head(1,0)
+        sleep(1)
         self.head(-1,0)
+        sleep(1)
         self.head(0,0)
 
     def head(self, x, y):
