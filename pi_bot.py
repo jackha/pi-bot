@@ -9,15 +9,15 @@ import random
 import datetime
 
 moods = {
-    'happy': {'smiley': smiley.smiley_happy_anim, 'movement': 1},
-    'sad': {'smiley': smiley.smiley_sad_anim, 'movement': 3},
-    'neutral': {'smiley': smiley.smiley_neutral_anim, 'movement': 2},
+    'happy': {'smiley': smiley.smiley_happy_anim, 'movement': 1, 'action': 'nod'},
+    'sad': {'smiley': smiley.smiley_sad_anim, 'movement': 3, 'action': 'shake'},
+    'neutral': {'smiley': smiley.smiley_neutral_anim, 'movement': 2, 'action': ''},
     'sleep': {'smiley': smiley.smiley_sleep_anim, 'movement': 0},
-    'uhuh': {'smiley': smiley.smiley_uhoh_anim, 'movement': 1},
-    'pacman': {'smiley': smiley.pacman_anim, 'movement': 3},
-    'ghost': {'smiley': smiley.ghost_anim, 'movement': 3},
-    'spiral': {'smiley': smiley.spiral_anim, 'movement': 3},
-    'grow_spiral': {'smiley': smiley.grow_spiral_anim, 'movement': 3},
+    'uhuh': {'smiley': smiley.smiley_uhoh_anim, 'movement': 1, 'action': 'shake'},
+    'pacman': {'smiley': smiley.pacman_anim, 'movement': 3, 'action': 'shake nod shake'},
+    'ghost': {'smiley': smiley.ghost_anim, 'movement': 3, 'action': 'nod shake nod'},
+    'spiral': {'smiley': smiley.spiral_anim, 'movement': 3, 'action': 'dizzy'},
+    'grow_spiral': {'smiley': smiley.grow_spiral_anim, 'movement': 3, 'action': 'dizzy dizzy'},
 }
 
 SERVO_MIN = 300
@@ -197,7 +197,7 @@ if __name__ == '__main__':
     mood_timeout = now
 
     me.reset_pwm()
-    import pdb; pdb.set_trace()
+    #import pdb; pdb.set_trace()
 
     while 1:
         now = datetime.datetime.now()
@@ -213,6 +213,16 @@ if __name__ == '__main__':
         if now > mood_timeout:
             # Choose a new mood
             me.mood(random.choice(moods.keys()))
+            if 'action' in moods[me._mood]:
+                actions = me[me._mood]['action'].split(' ')
+                for action in actions:
+                    if action == 'nod':
+                        me.nod()
+                    elif action == 'shake':
+                        me.shake()
+                    elif action == 'dizzy':
+                        me.dizzy()
+
             me.head(random.random()-0.5, random.random()-0.5)
             mood_timeout = now + datetime.timedelta(seconds=3.7)
             #me.mood_arms_and_legs()  # will block for a moment
