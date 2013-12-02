@@ -76,6 +76,8 @@ class Pibot(object):
         self.left_arm(-1)
         self.right_arm(1)
         sleep(1)
+        self.left_arm(0)
+        self.right_arm(0)
 
     def head(self, x, y):
         """move head from -1 to 1, (0,0) is center.
