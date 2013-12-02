@@ -214,7 +214,7 @@ if __name__ == '__main__':
             # Choose a new mood
             me.mood(random.choice(moods.keys()))
             if 'action' in moods[me._mood]:
-                actions = me[me._mood]['action'].split(' ')
+                actions = moods[me._mood]['action'].split(' ')
                 for action in actions:
                     if action == 'nod':
                         me.nod()
