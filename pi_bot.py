@@ -22,7 +22,7 @@ moods = {
 
 SERVO_MIN = 300
 SERVO_MAX = 500
-PWM_SLEEP = 0.2
+PWM_SLEEP = 0.01
 
 
 class Animation(object):
