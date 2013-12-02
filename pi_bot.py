@@ -22,7 +22,7 @@ moods = {
 
 SERVO_MIN = 300
 SERVO_MAX = 500
-PWM_SLEEP = 0.01
+PWM_SLEEP = 0.2
 
 
 class Animation(object):
@@ -129,6 +129,7 @@ class Pibot(object):
         self.head(-1,1)
         sleep(0.3)
         self.head(0,0)
+
     def head(self, x, y):
         """move head from -1 to 1, (0,0) is center.
 
