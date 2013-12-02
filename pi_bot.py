@@ -101,6 +101,24 @@ class Pibot(object):
         sleep(.5)
         self.head(0,0)
 
+    def dizzy(self):
+        self.head(-1,-1)
+        sleep(0.3)
+        self.head(1,-1)
+        sleep(0.3)
+        self.head(1,1)
+        sleep(0.3)
+        self.head(-1,1)
+        sleep(0.3)
+        self.head(-1,-1)
+        sleep(0.3)
+        self.head(1,-1)
+        sleep(0.3)
+        self.head(1,1)
+        sleep(0.3)
+        self.head(-1,1)
+        sleep(0.3)
+        self.head(0,0)
     def head(self, x, y):
         """move head from -1 to 1, (0,0) is center.
 
