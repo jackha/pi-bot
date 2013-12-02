@@ -89,16 +89,16 @@ class Pibot(object):
         sleep(PWM_SLEEP)
 
     def right_arm(self, value):
-        self.pwm_360(10, value)
+        self.pwm_360(8, value)
 
     def left_arm(self, value):
-        self.pwm_360(12, value)
+        self.pwm_360(10, value)
 
     def right_foot(self, value):
-        self.pwm_360(14, value)
+        self.pwm_360(12, value)
 
     def left_foow(self, value):
-        self.pwm_360(16, value)
+        self.pwm_360(14, value)
 
     def pwm_360(self, port, value):
         """Choose a value between -1 and 1"""
