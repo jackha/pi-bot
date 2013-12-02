@@ -91,24 +91,24 @@ class Pibot(object):
 
     def nod(self):
         self.head(0,1)
-        sleep(.3)
+        sleep(.2)
         self.head(0,-1)
-        sleep(.3)
+        sleep(.2)
         self.head(0,1)
-        sleep(.3)
+        sleep(.2)
         self.head(0,-1)
-        sleep(.3)
+        sleep(.2)
         self.head(0,0)
 
     def shake(self):
         self.head(1,0)
-        sleep(.3)
+        sleep(.2)
         self.head(-1,0)
-        sleep(.3)
+        sleep(.2)
         self.head(1,0)
-        sleep(.3)
+        sleep(.2)
         self.head(-1,0)
-        sleep(.3)
+        sleep(.2)
         self.head(0,0)
 
     def dizzy(self):
