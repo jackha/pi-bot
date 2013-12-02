@@ -79,6 +79,20 @@ class Pibot(object):
         self.left_arm(0)
         self.right_arm(0)
 
+    def nod(self):
+        self.head(0,1)
+        self.head(0,-1)
+        self.head(0,1)
+        self.head(0,-1)
+        self.head(0,0)
+
+    def shake(self):
+        self.head(1,0)
+        self.head(-1,0)
+        self.head(1,0)
+        self.head(-1,0)
+        self.head(0,0)
+
     def head(self, x, y):
         """move head from -1 to 1, (0,0) is center.
 
