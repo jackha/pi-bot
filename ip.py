@@ -1,11 +1,12 @@
 #!/usr/bin/python
  
-from Adafruit_CharLCD import Adafruit_CharLCD
+#from Adafruit_CharLCD import Adafruit_CharLCD
+from hd44780 import Hd44780
 from subprocess import *
 from time import sleep, strftime
 from datetime import datetime
  
-lcd = Adafruit_CharLCD()
+lcd = Hd44780()
  
 cmd = "ip addr show eth0 | grep inet | awk '{print $2}' | cut -d/ -f1"
  
