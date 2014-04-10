@@ -7,6 +7,7 @@ from hd44780 import Hd44780
 import smiley
 import random
 import datetime
+import wiringpi2
 
 moods = {
     'happy': {'smiley': smiley.smiley_happy_anim, 'movement': 1, 'action': 'nod'},
@@ -24,6 +25,20 @@ SERVO_MIN = 300
 SERVO_MAX = 500
 PWM_SLEEP = 0.01
 
+INPUT_PINS = {'sound-sensor': 1,   # labelled PWM
+    }
+
+class PushButtons(object):
+    def __init__(self, button_pins):
+        self.gpio = wiringpi2.GPIO(wiringpi2.GPIO.WPI_MODE_PINS)
+        self.button_pins = button_pins
+
+        for button_name, button_pin in self.button_pins.items():
+            self.gpio.pinMode(button_pin, self.gpio.INPUT)
+            self.gpio.pullUpDnControl(button_pin, self.gpio.PUD_UP)
+
+    def read(self, button_name):
+        return self.gpio.digitalRead(self.button_pins[button_name]) == wiringpi2.GPIO.LOW
 
 class Animation(object):
     def __init__(self, smiley):
@@ -176,6 +191,8 @@ if __name__ == '__main__':
     grid = EightByEightPlus(address=0x71)
     lcd = Hd44780()
 
+    inputs = PushButtons(INPUT_PINS)
+
     me = Pibot(grid, lcd, pwm)
     me.mood('happy')
     me.head(0,0)
@@ -210,7 +227,7 @@ if __name__ == '__main__':
             #me.head(random.random()-0.5, random.random()-0.5)
             pass
 
-        if now > mood_timeout:
+        if now > mood_timeout or inputs.read('sound-sensor'):
             # Choose a new mood
             me.mood(random.choice(moods.keys()))
             if 'action' in moods[me._mood]:
@@ -226,5 +243,6 @@ if __name__ == '__main__':
             me.head(random.random()-0.5, random.random()-0.5)
             mood_timeout = now + datetime.timedelta(seconds=600.7)
             #me.mood_arms_and_legs()  # will block for a moment
+
 
         sleep(0.1)

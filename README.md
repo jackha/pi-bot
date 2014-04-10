@@ -54,6 +54,19 @@ Configure RPi for I2C
 http://learn.adafruit.com/adafruit-16-channel-servo-driver-with-raspberry-pi/configuring-your-pi-for-i2c
 
 
+GPIO input/output
+=================
+
+wiringpi2
+
+    $ sudo apt-get install python-dev python-setuptools
+    $ git clone git://git.drogon.net/wiringPi
+    $ cd wiringPi
+    $ sudo ./build
+    $ git clone https://github.com/Gadgetoid/WiringPi2-Python.git
+    $ cd WiringPi2-Python/
+    $ sudo python setup.py install
+    $ cd ..
 
 Camera / SimpleCV / OpenCV
 ==========================
