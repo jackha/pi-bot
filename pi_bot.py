@@ -245,4 +245,4 @@ if __name__ == '__main__':
             #me.mood_arms_and_legs()  # will block for a moment
 
 
-        sleep(0.1)
+        sleep(0.01)
