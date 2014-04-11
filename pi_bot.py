@@ -289,13 +289,13 @@ if __name__ == '__main__':
         if inputs.read('sound-sensor'):
             me.mood('happy')
             me.mood_arms_and_legs()  # will block for a moment
-            mood_timeout = now + datetime.timedelta(seconds=600.7)
+            mood_timeout = now + datetime.timedelta(seconds=10)
 
         if inputs.read('action'):
             new_right_arm_value = 0
             new_left_arm_value = 0
             if inputs.read('up'):
-                new_right_arm_value = 1                
+                new_right_arm_value = -1                
             if inputs.read('down'):
                 new_left_arm_value = 1
             if inputs.read('left'):
