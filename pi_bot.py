@@ -76,6 +76,8 @@ class Pibot(object):
 
         self.headx = 0
         self.heady = 0
+        self.left_arm_value = 0
+        self.right_arm_value = 0
 
     def mood(self, mood=None):
         if mood is not None:
@@ -173,9 +175,15 @@ class Pibot(object):
         self.head(self.headx, self.heady)
 
     def right_arm(self, value):
+        if value == self.right_arm_value:
+            return
+        self.right_arm_value = value
         self.pwm_360(8, value)
 
     def left_arm(self, value):
+        if value == self.left_arm_value:
+            return
+        self.left_arm_value = value
         self.pwm_360(10, value)
 
     def right_foot(self, value):
@@ -265,7 +273,22 @@ if __name__ == '__main__':
             me.mood_arms_and_legs()  # will block for a moment
             mood_timeout = now + datetime.timedelta(seconds=600.7)
 
-        if not inputs.read('action'):
+        if inputs.read('action'):
+            new_right_arm_value = 0
+            new_left_arm_value = 0
+            if inputs.read('up'):
+                new_right_arm_value = 1                
+            if inputs.read('down'):
+                new_left_arm_value = 1
+            if inputs.read('left'):
+                new_left_arm_value = -1
+                new_right_arm_value = 1
+            if inputs.read('right'):
+                new_left_arm_value = 1
+                new_right_arm_value = -1
+            me.left_arm(new_left_arm_value)
+            me.right_arm(new_right_arm_value)
+        else:
             if inputs.read('up'):
                 me.head_delta(0, -0.1)
             if inputs.read('down'):
