@@ -291,9 +291,9 @@ if __name__ == '__main__':
                 new_right_arm_value = -1
             me.left_arm(new_left_arm_value)
             me.right_arm(new_right_arm_value)
-            if new_left_arm_value == 0 and new_right_arm_value == 0:
-                # action button only
-                new_mood(random.choice(moods.keys()))
+            #if new_left_arm_value == 0 and new_right_arm_value == 0:
+            #    # action button only
+            #    new_mood(random.choice(moods.keys()))
         else:
             if inputs.read('up'):
                 me.head_delta(0, -0.1)
