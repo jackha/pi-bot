@@ -269,7 +269,7 @@ if __name__ == '__main__':
             if inputs.read('up'):
                 me.head_delta(0, -0.1)
             if inputs.read('down'):
-                me.head_delta(0, -1)
+                me.head_delta(0, 0.1)
             if inputs.read('left'):
                 me.head_delta(0.1, 0)
             if inputs.read('right'):
