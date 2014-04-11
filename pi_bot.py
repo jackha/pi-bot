@@ -38,13 +38,18 @@ class PushButtons(object):
     def __init__(self, button_pins):
         self.gpio = wiringpi2.GPIO(wiringpi2.GPIO.WPI_MODE_PINS)
         self.button_pins = button_pins
+        self.last_state = {}
 
         for button_name, button_pin in self.button_pins.items():
             self.gpio.pinMode(button_pin, self.gpio.INPUT)
             self.gpio.pullUpDnControl(button_pin, self.gpio.PUD_UP)
 
+            self.last_state[button_name] = 0  # reset to 0
+
     def read(self, button_name):
-        return self.gpio.digitalRead(self.button_pins[button_name]) == wiringpi2.GPIO.LOW
+        value = self.gpio.digitalRead(self.button_pins[button_name]) == wiringpi2.GPIO.LOW
+        self.last_state[button_name] = value
+        return value
 
 class Animation(object):
     def __init__(self, smiley):
@@ -81,6 +86,9 @@ class Pibot(object):
         self.left_foot_value = 0
         self.right_foot_value = 0
 
+        self.mood_list = moods.keys()
+        self.mood_idx = 0  # only when using mood_up and mood_down
+
     def mood(self, mood=None):
         if mood is not None:
             self._mood = mood
@@ -90,6 +98,14 @@ class Pibot(object):
         if update_grid is not None:
             self.grid.grid_array(update_grid)
         return self._mood
+
+    def mood_up(self):
+        self.mood_idx = (self.mood_idx + 1) % len(self.mood_list)
+        self.mood(self.mood_list[self.mood_idx])
+
+    def mood_down(self):
+        self.mood_idx = (self.mood_idx - 1) % len(self.mood_list)
+        self.mood(self.mood_list[self.mood_idx])
 
     def mood_arms_and_legs(self):
         self.left_arm(1)
@@ -304,16 +320,18 @@ if __name__ == '__main__':
             new_left_arm_value = 0
             new_right_foot_value = 0
             new_left_foot_value = 0
-            if inputs.read('up'):
-                new_right_foot_value = 1                
-            if inputs.read('down'):
-                new_left_foot_value = -1
+            if inputs.read('up') and not inputs.last_state['up']:  # trigger once
+                me.mood_up()
+            if inputs.read('down') and not inputs.last_state['down']:  # trigger once
+                me.mood_down()
             if inputs.read('left'):
                 new_left_arm_value = 1
                 new_right_arm_value = 1
+                new_right_foot_value = 1                
             if inputs.read('right'):
                 new_left_arm_value = -1
                 new_right_arm_value = -1
+                new_left_foot_value = -1
             me.left_arm(new_left_arm_value)
             me.right_arm(new_right_arm_value)
             me.left_foot(new_left_foot_value)
