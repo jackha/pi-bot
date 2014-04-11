@@ -78,6 +78,8 @@ class Pibot(object):
         self.heady = 0
         self.left_arm_value = 0
         self.right_arm_value = 0
+        self.left_foot_value = 0
+        self.right_foot_value = 0
 
     def mood(self, mood=None):
         if mood is not None:
@@ -187,9 +189,15 @@ class Pibot(object):
         self.pwm_360(10, value)
 
     def right_foot(self, value):
+        if value == self.right_foot_value:
+            return
+        self.right_foot_value = value
         self.pwm_360(12, value)
 
     def left_foow(self, value):
+        if value == self.left_foot_value:
+            return
+        self.left_foot_value = value
         self.pwm_360(14, value)
 
     def pwm_360(self, port, value):
@@ -294,10 +302,12 @@ if __name__ == '__main__':
         if inputs.read('action'):
             new_right_arm_value = 0
             new_left_arm_value = 0
+            new_right_foot_value = 0
+            new_left_foot_value = 0
             if inputs.read('up'):
-                new_right_arm_value = -1                
+                new_right_foot_value = -1                
             if inputs.read('down'):
-                new_left_arm_value = 1
+                new_left_foot_value = 1
             if inputs.read('left'):
                 new_left_arm_value = -1
                 new_right_arm_value = 1
@@ -306,6 +316,8 @@ if __name__ == '__main__':
                 new_right_arm_value = -1
             me.left_arm(new_left_arm_value)
             me.right_arm(new_right_arm_value)
+            me.left_foot(new_left_foot_value)
+            me.right_foot(new_right_foot_value)
             #if new_left_arm_value == 0 and new_right_arm_value == 0:
             #    # action button only
             #    new_mood(random.choice(moods.keys()))
