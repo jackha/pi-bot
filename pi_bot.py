@@ -25,7 +25,13 @@ SERVO_MIN = 300
 SERVO_MAX = 500
 PWM_SLEEP = 0.01
 
-INPUT_PINS = {'sound-sensor': 1,   # labelled PWM
+INPUT_PINS = {
+    'sound-sensor': 1,   # labelled PWM
+    'action': 7,  # joystick
+    'up': 15,
+    'down': 16,
+    'left': 10,
+    'right': 11,
     }
 
 class PushButtons(object):
@@ -67,6 +73,9 @@ class Pibot(object):
         self.mood_animations = {}
         for mood, value in moods.items():
             self.mood_animations[mood] = Animation(value['smiley'])
+
+        self.headx = 0
+        self.heady = 0
 
     def mood(self, mood=None):
         if mood is not None:
@@ -151,10 +160,17 @@ class Pibot(object):
         4 is x axis, 
         5 is y axis
         """
+        self.headx = x
+        self.heady = y
         self.pwm.setPWM(4, 0, int((float(x)+1)/2 * (SERVO_MAX-SERVO_MIN) + SERVO_MIN))
         sleep(PWM_SLEEP)
         self.pwm.setPWM(5, 0, int((float(y)+1)/2 * (SERVO_MAX-SERVO_MIN) + SERVO_MIN))
         sleep(PWM_SLEEP)
+
+    def head_delta(self, delta_x, delta_y):
+        self.headx = min(max(self.headx + delta_x, -1), 1)
+        self.heady = min(max(self.heady + delta_y, -1), 1)
+        self.head(self.headx, self.heady)
 
     def right_arm(self, value):
         self.pwm_360(8, value)
@@ -227,7 +243,7 @@ if __name__ == '__main__':
             #me.head(random.random()-0.5, random.random()-0.5)
             pass
 
-        if now > mood_timeout or inputs.read('sound-sensor'):
+        if now > mood_timeout:
             # Choose a new mood
             me.mood(random.choice(moods.keys()))
             if 'action' in moods[me._mood]:
@@ -244,5 +260,19 @@ if __name__ == '__main__':
             mood_timeout = now + datetime.timedelta(seconds=600.7)
             #me.mood_arms_and_legs()  # will block for a moment
 
+        if inputs.read('sound-sensor'):
+            me.mood('happy')
+            me.mood_arms_and_legs()  # will block for a moment
+            mood_timeout = now + datetime.timedelta(seconds=600.7)
+
+        if not input.read('action'):
+            if inputs.read('up'):
+                me.head_delta(0, -0.1)
+            if inputs.read('down'):
+                me.head_delta(0, -1)
+            if inputs.read('left'):
+                me.head_delta(0.1, 0)
+            if inputs.read('right'):
+                me.head_delta(-0.1, 0)
 
         sleep(0.01)
