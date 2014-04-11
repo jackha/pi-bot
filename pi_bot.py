@@ -269,7 +269,22 @@ if __name__ == '__main__':
             pass
 
         if now > mood_timeout:
-            new_mood(random.choice(moods.keys()))
+            #new_mood(random.choice(moods.keys()))
+            # Choose a new mood
+            me.mood(random.choice(moods.keys()))
+            if 'action' in moods[me._mood]:
+                actions = moods[me._mood]['action'].split(' ')
+                for action in actions:
+                    if action == 'nod':
+                        me.nod()
+                    elif action == 'shake':
+                        me.shake()
+                    elif action == 'dizzy':
+                        me.dizzy()
+
+            me.head(random.random()-0.5, random.random()-0.5)
+            mood_timeout = now + datetime.timedelta(seconds=600.7)
+            #me.mood_arms_and_legs()  # will block for a moment
 
         if inputs.read('sound-sensor'):
             me.mood('happy')
