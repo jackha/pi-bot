@@ -305,9 +305,9 @@ if __name__ == '__main__':
             new_right_foot_value = 0
             new_left_foot_value = 0
             if inputs.read('up'):
-                new_right_foot_value = -1                
+                new_right_foot_value = 1                
             if inputs.read('down'):
-                new_left_foot_value = 1
+                new_left_foot_value = -1
             if inputs.read('left'):
                 new_left_arm_value = 1
                 new_right_arm_value = 1
