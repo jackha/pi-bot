@@ -265,7 +265,7 @@ if __name__ == '__main__':
             me.mood_arms_and_legs()  # will block for a moment
             mood_timeout = now + datetime.timedelta(seconds=600.7)
 
-        if not input.read('action'):
+        if not inputs.read('action'):
             if inputs.read('up'):
                 me.head_delta(0, -0.1)
             if inputs.read('down'):
