@@ -240,6 +240,23 @@ if __name__ == '__main__':
     me.reset_pwm()
     #import pdb; pdb.set_trace()
 
+    def new_mood(mood):
+        # Choose a new mood
+        me.mood(mood)
+        if 'action' in moods[me._mood]:
+            actions = moods[me._mood]['action'].split(' ')
+            for action in actions:
+                if action == 'nod':
+                    me.nod()
+                elif action == 'shake':
+                    me.shake()
+                elif action == 'dizzy':
+                    me.dizzy()
+
+        me.head(random.random()-0.5, random.random()-0.5)
+        mood_timeout = now + datetime.timedelta(seconds=600.7)
+        #me.mood_arms_and_legs()  # will block for a moment
+
     while 1:
         now = datetime.datetime.now()
         me.mood()  # Triggers update animation
@@ -252,21 +269,7 @@ if __name__ == '__main__':
             pass
 
         if now > mood_timeout:
-            # Choose a new mood
-            me.mood(random.choice(moods.keys()))
-            if 'action' in moods[me._mood]:
-                actions = moods[me._mood]['action'].split(' ')
-                for action in actions:
-                    if action == 'nod':
-                        me.nod()
-                    elif action == 'shake':
-                        me.shake()
-                    elif action == 'dizzy':
-                        me.dizzy()
-
-            me.head(random.random()-0.5, random.random()-0.5)
-            mood_timeout = now + datetime.timedelta(seconds=600.7)
-            #me.mood_arms_and_legs()  # will block for a moment
+            new_mood(random.choice(moods.keys()))
 
         if inputs.read('sound-sensor'):
             me.mood('happy')
@@ -288,6 +291,9 @@ if __name__ == '__main__':
                 new_right_arm_value = -1
             me.left_arm(new_left_arm_value)
             me.right_arm(new_right_arm_value)
+            if new_left_arm_value == 0 and new_right_arm_value == 0:
+                # action button only
+                new_mood(random.choice(moods.keys()))
         else:
             if inputs.read('up'):
                 me.head_delta(0, -0.1)
