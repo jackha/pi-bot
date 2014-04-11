@@ -194,7 +194,7 @@ class Pibot(object):
         self.right_foot_value = value
         self.pwm_360(12, value)
 
-    def left_foow(self, value):
+    def left_foot(self, value):
         if value == self.left_foot_value:
             return
         self.left_foot_value = value
@@ -309,10 +309,10 @@ if __name__ == '__main__':
             if inputs.read('down'):
                 new_left_foot_value = 1
             if inputs.read('left'):
-                new_left_arm_value = -1
+                new_left_arm_value = 1
                 new_right_arm_value = 1
             if inputs.read('right'):
-                new_left_arm_value = 1
+                new_left_arm_value = -1
                 new_right_arm_value = -1
             me.left_arm(new_left_arm_value)
             me.right_arm(new_right_arm_value)
