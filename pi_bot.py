@@ -320,9 +320,9 @@ if __name__ == '__main__':
             new_left_arm_value = 0
             new_right_foot_value = 0
             new_left_foot_value = 0
-            if inputs.read('up') and not inputs.last_state['up']:  # trigger once
+            if not inputs.last_state['up'] and inputs.read('up'):  # trigger once
                 me.mood_up()
-            if inputs.read('down') and not inputs.last_state['down']:  # trigger once
+            if not inputs.last_state['down'] and inputs.read('down'):  # trigger once
                 me.mood_down()
             if inputs.read('left'):
                 new_left_arm_value = 1
