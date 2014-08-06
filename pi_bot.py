@@ -319,6 +319,8 @@ if __name__ == '__main__':
             new_left_arm_value = 0
             new_right_foot_value = 0
             new_left_foot_value = 0
+            head_x_target = random.random() - 0.5
+            head_y_target = random.random() - 0.5
             if not inputs.last_state['up'] and inputs.read('up'):  # trigger once
                 me.mood_up()
                 me.nod()
