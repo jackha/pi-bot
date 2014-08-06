@@ -281,39 +281,38 @@ if __name__ == '__main__':
         mood_timeout = now + datetime.timedelta(seconds=600.7)
         #me.mood_arms_and_legs()  # will block for a moment
 
+    head_x_target = 0
+    head_y_target = 0
+    head_x_delta = 0
+    head_y_delta = 0
+
     while 1:
         now = datetime.datetime.now()
         me.mood()  # Triggers update animation
-
-        if now > movement_timeout and me.mood() != 'sleep':
-            #me.head(random.random()-0.5, random.random()-0.5)
-            #me.left_arm(int(random.random()*1000))
-            #movement_timeout = now + datetime.timedelta(seconds=moods[me.mood()]['movement'])
-            #me.head(random.random()-0.5, random.random()-0.5)
-            pass
+        if head_x_target > me.headx:
+            head_x_delta = 0.01
+        elif head_x_target < me.headx:
+            head_x_delta = -0.01
+        else:
+            head_x_delta = 0
+        if head_y_target > me.heady:
+            head_y_delta = 0.01
+        elif head_y_target < me.heady:
+            head_y_delta = -0.01
+        else:
+            head_y_delta = 0
+        if head_x_delta or head_y_delta:
+            me.head_delta(head_x_delta, head_y_delta)
 
         if now > mood_timeout:
             #new_mood(random.choice(moods.keys()))
             # Choose a new mood
             me.mood(random.choice(moods.keys()))
-            if 'action' in moods[me._mood]:
-                actions = moods[me._mood]['action'].split(' ')
-                for action in actions:
-                    if action == 'nod':
-                        me.nod()
-                    elif action == 'shake':
-                        me.shake()
-                    elif action == 'dizzy':
-                        me.dizzy()
-
-            me.head(random.random()-0.5, random.random()-0.5)
+            #me.head(random.random()-0.5, random.random()-0.5)
+            head_x_target = random.random() - 0.5
+            head_y_target = random.random() - 0.5
             mood_timeout = now + datetime.timedelta(seconds=600.7)
             #me.mood_arms_and_legs()  # will block for a moment
-
-        if inputs.read('sound-sensor'):
-            me.mood('happy')
-            me.mood_arms_and_legs()  # will block for a moment
-            mood_timeout = now + datetime.timedelta(seconds=10)
 
         if inputs.read('action'):
             new_right_arm_value = 0
@@ -322,8 +321,10 @@ if __name__ == '__main__':
             new_left_foot_value = 0
             if not inputs.last_state['up'] and inputs.read('up'):  # trigger once
                 me.mood_up()
+                me.nod()
             if not inputs.last_state['down'] and inputs.read('down'):  # trigger once
                 me.mood_down()
+                me.shake()
             if inputs.read('left'):
                 new_left_arm_value = 1
                 new_right_arm_value = 1
