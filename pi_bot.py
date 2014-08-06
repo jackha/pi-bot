@@ -309,8 +309,8 @@ if __name__ == '__main__':
             # Choose a new mood
             me.mood(random.choice(moods.keys()))
             #me.head(random.random()-0.5, random.random()-0.5)
-            head_x_target = random.random() - 0.5
-            head_y_target = random.random() - 0.5
+            head_x_target = 2 * random.random() - 1
+            head_y_target = 2 * random.random() - 1
             mood_timeout = now + datetime.timedelta(seconds=600.7)
             #me.mood_arms_and_legs()  # will block for a moment
 
