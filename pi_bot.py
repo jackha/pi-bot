@@ -343,13 +343,21 @@ if __name__ == '__main__':
             #    # action button only
             #    new_mood(random.choice(moods.keys()))
         else:
+            i_moved = False
             if inputs.read('up'):
                 me.head_delta(0, -0.1)
+                i_moved = True
             if inputs.read('down'):
                 me.head_delta(0, 0.1)
+                i_moved = True
             if inputs.read('left'):
                 me.head_delta(0.1, 0)
+                i_moved = True
             if inputs.read('right'):
                 me.head_delta(-0.1, 0)
+                i_moved = True
+            if i_moved:
+                head_x_target = me.headx
+                head_y_target = me.heady
 
         sleep(0.01)
